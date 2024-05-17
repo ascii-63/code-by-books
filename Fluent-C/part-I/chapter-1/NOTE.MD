@@ -21,7 +21,7 @@ similar to the concept of constructors and destructors in object-oriented progra
 
 1. **Abort the program in a structured way by using the `assert` statement.** 
 Additionally, you can provide debug information with the `assert` statement as shown in the following code:
-```cpp
+```c
 void someFunction()
 {
     assert(checkPreconditions() && "Preconditions are not met");
@@ -30,7 +30,7 @@ void someFunction()
 ```
 2. **Have all resource cleanup and error handling at the end of the function.** 
 If a resource cannot be acquired, use the `goto` statement to jump to the resource cleanup code.
-```cpp
+```c
 void someFunction()
 {
     if(!allocateResource1())
@@ -56,7 +56,7 @@ For each function call, store the acquired resource in a variable.
 Have the code operating on the resources in the body of the if statement, and have all resource cleanup
 after the if statement only if the resource was successfully acquired. 
 The following code shows an example of this:
-```cpp
+```c
 void someFunction()
 {
     if((r1=allocateResource1()) && (r2=allocateResource2()))
@@ -77,7 +77,7 @@ void someFunction()
 If resource allocation fails, store this information in a variable (for example, a NULL pointer if memory allocation fails). 
 When using or cleaning up the resources, first check whether the resource is valid. 
 Perform that check not in your main function, but rather in the called functions, because that makes your main function a lot more readable:
-```cpp
+```c
 void someFunction()
 {
     allocateResources();

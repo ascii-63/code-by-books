@@ -19,7 +19,7 @@ the calling code and error information that is relevant for the developer
 Give the status identifiers a meaningful name and document their meaning with
 comments. 
 Make sure to name your status codes in a consistent way across your APIs.
-```cpp
+```c
 // Callee API providing status codes
 typedef enum
 {
@@ -66,7 +66,7 @@ else if(status == OK)
 
 2. **Only return error information to the caller if that information is relevant to the caller.** 
 Error information is only relevant to the caller if the caller can react to that information.
-```cpp
+```c
 //Caller’s code
 ErrorCode status = func();
 if(status == MAJOR_ERROR || status == UNKNOWN_ERROR)
@@ -124,7 +124,7 @@ ErrorCode func()
 Reserve one or more special values to be returned if an error occurs.**
 You have to make sure to document in the API which returned special value has which meaning. 
 In some cases, a common convention settles which special values indicate errors.
-```cpp
+```c
 // Callee implementation
 void* func()
 {
@@ -159,7 +159,7 @@ The C language comes with special
 macros to get information about the current line number (`__LINE__`), the current
 function (`__func__`), or the current file (`__FILE__`). 
 The following code uses the `__func__` macro for logging:
-```cpp
+```c
 void someFunction()
 {
     if(something_goes_wrong)
@@ -172,7 +172,7 @@ To get more detailed logging, you could even trace your function calls and log t
 That makes it easier to reverse-engineer error situations with these logs, 
 but of course that logging also introduces computational overhead. 
 For tracing return values of your function calls, you can use the following code:
-```cpp
+```c
 #define RETURN(x)           \
 do {                        \
     logInFile(__func__, x); \
@@ -185,11 +185,11 @@ int soneFunction()
 }
 ```
 
-## Tricks:
+## Useful things you may not have known before:
 1. **Multiline Macros**
 
 By having a do/while loop around the statements in a macro, you can avoid problems like the one shown in the following code:
-```cpp
+```c
 #define MACRO(x)    \
 x=1;                \
 x=2;                \
@@ -200,7 +200,7 @@ if(x==0)
 The code does not use curly braces around its if body, and when reading the code
 you might think that the thing in the macro is only executed in case `x==0`. 
 But actually when the macro expands, you end up with the following code:
-```cpp
+```c
 if(x==0)
     x=1;
 x=2;
