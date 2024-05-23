@@ -82,12 +82,13 @@ int addNext(int value)
 ```
 
 3. **Caller-Owned Instance:**
-To implement such an instance that can be accessed from multiple functions, pass a
+
+    To implement such an instance that can be accessed from multiple functions, pass a
 struct pointer along with all functions that require sharing resources or state information. 
 The functions can now use the struct members, which are similar to private variables 
 in object-oriented languages, to store and read resource and state information.
 
-The struct can be declared in the API to let the caller conveniently access its mem‐
+    The struct can be declared in the API to let the caller conveniently access its mem‐
 bers directly. Alternatively, the struct can be declared in the implementation, and
 only a pointer to the struct can be declared in the API (as suggested by Handle). The
 caller does not know the struct members (they are like private variables) and can

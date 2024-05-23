@@ -1,0 +1,30 @@
+// Driver.h
+
+typedef struct INTERNAL_DRIVER_STRUCT *DRIVER_HANDLE;
+typedef void (*DriverSend_FP)(char byte);
+typedef char (*DriverReceive_FP)();
+typedef void (*DriverIOCTL_FP)(int ioctl, void *context);
+
+struct DriverFunctions
+{
+    DriverSend_FP fpSend;
+    DriverReceive_FP fpReceive;
+    DriverIOCTL_FP fpIOCTL;
+};
+
+DRIVER_HANDLE driverCreate(void *initArg, struct DriverFunctions f);
+void driverDestroy(DRIVER_HANDLE h);
+void sendByte(DRIVER_HANDLE h, char byte);
+char receiveByte(DRIVER_HANDLE h);
+void driverIOCTL(DRIVER_HANDLE h, int ioctl, void *context);
+/* the parameter "context" is required to pass information like the
+value of the IP address to configure to the implementation */
+
+// EthIOCTL.h
+
+#define SET_IP_ADDRESS 1
+#define SET_MAC_ADDRESS 2
+
+// UsbIOCTL.h
+
+#define SET_USB_PROTOCOL_TYPE 3
